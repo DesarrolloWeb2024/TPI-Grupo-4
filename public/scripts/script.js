@@ -80,3 +80,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+// Simulación de productos en el carrito
+const cart = [
+    { id: 1, name: "Martillo", price: 500 },
+    { id: 2, name: "Destornillador", price: 300 },
+    { id: 3, name: "Taladro", price: 1500 },
+];
+
+// Elementos DOM
+const cartIcon = document.getElementById("cart-icon");
+const cartModal = document.getElementById("cart-modal");
+const closeModal = document.getElementById("close-cart-modal");
+const cartItemsContainer = document.getElementById("cart-items");
+const cartTotal = document.getElementById("cart-total");
+const cartCount = document.getElementById("cart-count");
+
+// Función para renderizar el carrito
+function renderCartItems() {
+    cartItemsContainer.innerHTML = ""; // Limpiar contenido previo
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.price;
+        const cartItem = document.createElement("div");
+        cartItem.className = "cart-item";
+        cartItem.innerHTML = `
+            <span class="cart-item-name">${item.name}</span>
+            <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+    cartCount.textContent = cart.length; // Actualizar contador del carrito
+}
+
+// Mostrar el modal
+cartIcon.addEventListener("click", () => {
+    renderCartItems();
+    cartModal.style.display = "block";
+});
+
+// Cerrar el modal
+closeModal.addEventListener("click", () => {
+    cartModal.style.display = "none";
+});
+
+// Cerrar el modal al hacer clic fuera del contenido
+window.addEventListener("click", (event) => {
+    if (event.target === cartModal) {
+        cartModal.style.display = "none";
+    }
+});
+
+// Manejar el botón de finalizar compra
+document.getElementById("checkout-button").addEventListener("click", () => {
+    alert("¡Gracias por tu compra!");
+    cartModal.style.display = "none";
+});
