@@ -42,14 +42,13 @@
                             <a class="nav-link" href="contacto.html">Contacto</a>
                         </li>
                      <!-- Carrito de compras -->
-        <li class="nav-item carrito">
-            <a class="nav-link" href="#" id="cart">
-                <i class="fas fa-shopping-cart"></i> 
-                
- 
-<span id="cart-count" class="cart-count">0</span> <!-- Contador de productos -->
-            </a>
-        </li>
+                     <li class="nav-item carrito">
+                        <a class="nav-link" href="#" id="cart">
+                            <i class="fas fa-shopping-cart"></i> 
+                            <span id="cart-count" class="cart-count">0</span> <!-- Contador de productos -->
+                        </a>
+                    </li>
+                    
 
                     </ul>
                 </nav>
@@ -160,6 +159,21 @@
                 </div>      </div>
         </div>   </div>
 </section  
+<!-- Modal del carrito -->
+<div id="cart-modal" class="cart-modal" style="display: none;">
+    <div class="cart-modal-content">
+        <span id="close-cart-modal" class="close-cart-modal">&times;</span>
+        <h2 class="cart-title">Tu Carrito</h2>
+        <div id="cart-items" class="cart-items">
+            <!-- Aquí se mostrarán los productos -->
+        </div>
+        <div class="cart-summary">
+            <p>Total: <span id="cart-total">$0.00</span></p>
+            <button id="checkout-button" class="btn-checkout">Finalizar Compra</button>
+        </div>
+    </div>
+</div>
+
     <!-- Footer -->
                 <footer class="footer bg-dark text-white">
                     <div class="container py-5">
@@ -221,5 +235,59 @@
     </a>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = [];
+            const cartModal = document.getElementById('cart-modal');
+            const cartIcon = document.getElementById('cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const cartCountElement = document.getElementById('cart-count');
+            const closeCartModal = document.getElementById('close-cart-modal');
+            const addToCartButtons = document.querySelectorAll('.btn-agregar');
+    
+            // Manejar clics en "Agregar al carrito"
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productCard = event.target.closest('.producto-card');
+                    const productName = productCard.querySelector('.producto-nombre').textContent;
+                    const productPrice = parseFloat(productCard.querySelector('.producto-precio').textContent.replace(/[^0-9.-]+/g, ''));
+    
+                    cart.push({ name: productName, price: productPrice });
+                    updateCartUI();
+                });
+            });
+    
+            // Abrir modal del carrito
+            cartIcon.addEventListener('click', (event) => {
+                event.preventDefault();
+                cartModal.style.display = 'block';
+                renderCartItems();
+            });
+    
+            // Cerrar modal del carrito
+            closeCartModal.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+            });
+    
+            // Actualizar el UI del carrito (contador y total)
+            function updateCartUI() {
+                cartCountElement.textContent = cart.length;
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                cartTotalElement.textContent = `$${total.toFixed(2)}`;
+            }
+    
+            // Renderizar los productos en el carrito
+            function renderCartItems() {
+                cartItemsContainer.innerHTML = ''; // Limpiar contenido previo
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+        });
+    </script>
+    
 </body>
 </html>
