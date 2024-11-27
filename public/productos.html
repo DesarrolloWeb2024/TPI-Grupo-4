@@ -245,6 +245,7 @@
             const cartCountElement = document.getElementById('cart-count');
             const closeCartModal = document.getElementById('close-cart-modal');
             const addToCartButtons = document.querySelectorAll('.btn-agregar');
+            const checkoutButton = document.getElementById('checkout-button'); // Botón de finalizar compra
     
             // Manejar clics en "Agregar al carrito"
             addToCartButtons.forEach(button => {
@@ -286,8 +287,17 @@
                     cartItemsContainer.appendChild(itemElement);
                 });
             }
+    
+            // Manejador para el botón de finalizar compra
+            checkoutButton.addEventListener('click', () => {
+                // Mostrar mensaje de agradecimiento
+                alert('Gracias por comprar y confiar en nosotros. Por favor revisar su E-mail :)');
+    
+                // Redirigir al inicio
+                window.location.href = 'index.html';
+            });
         });
-    </script>
+    </script>    
     
 </body>
 </html>
