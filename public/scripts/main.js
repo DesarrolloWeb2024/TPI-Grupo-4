@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <div class="col-12 mt-auto">
                                     <!-- Botón con el enlace fijo de Mercado Libre -->
-                                    <a href="https://www.mercadolibre.com/jms/mla/lgz/msl/login/H4sIAAAAAAAEAzWNwQ7DIAxD_yXnqr1z3I-gjKYULRQE6ehU9d8bpu1o-9k-gZMPm5VPJjBAR-bggsAAmVGWVKINswYxq1WD0E8ydgQLRhIqFczZhzzND9JSn1qQKymEu6x24dTU-36pF6qlQ3sbsm30fAfq6b_hk4pVJFczTa21MVJxOKeMPo0uxRHLBNegfBUrBd0LjJSdrhut-OJLzQAAAA/user" class="btn btn-primary btn-agregar" target="_blank">Comprar Ya!</a>
+                                    <a href="https://mpago.la/33stx8j" class="btn btn-primary btn-agregar" target="_blank">Comprar Ya!</a>
                                 </div>
                             </div>
                         </div>
